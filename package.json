@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src",
-    "start-dev": "nodemon src/"
+    "start-dev": "nodemon src/",
+    "linter": "eslint '**/*.js' --ignore-pattern='!.eslintrc.js'",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,8 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "eslint": "^8.42.0",
+    "husky": "^8.0.3",
     "nodemon": "^2.0.22"
   }
 }
