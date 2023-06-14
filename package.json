@@ -2,11 +2,11 @@
   "name": "restapi1",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src",
-    "start-dev": "nodemon src/",
+    "start": "node app.js",
+    "start-dev": "nodemon app.js",
     "linter": "eslint '**/*.js' --ignore-pattern='!.eslintrc.js'",
     "prepare": "husky install"
   },

@@ -1,4 +1,4 @@
-const { getDatabase } = require('./mongodb');
+const { getDatabase } = require('../utils/mongodb');
 const { ObjectId } = require('mongodb');
 
 const collectionName = 'Ads';
@@ -16,7 +16,31 @@ async function getAds() {
   return await database.collection(collectionName).find({}).toArray();
 }
 
+async function deleteAd(id) {
+  const database = await getDatabase();
+
+  await database.collection(collectionName).deleteOne({
+    _id: new ObjectId(id),
+  });
+}
+
+async function updateAd(id, ad) {
+  const database = await getDatabase();
+
+  delete ad._id;
+  await database.collection(collectionName).updateOne(
+    { _id: new ObjectId(id) },
+    {
+      $set: {
+        ...ad,
+      },
+    },
+  );
+  
+}
 module.exports = {
   insertAd,
   getAds,
+  deleteAd,
+  updateAd,
 };
