@@ -3,6 +3,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 const morgan = require('morgan');
+const { startDatabase } = require('./model/mongodb');
+const { insertAd, getAds } = require('./model/ads');
 
 const app = express();
 
@@ -13,12 +15,13 @@ app.use(helmet());
 app.use(cors());
 app.use(morgan('tiny'));
 
-app.get('/', (req, res) => {
-  res.send([{
-    title: 'Hello world',
-  }]);
+app.get('/', async (req, res) => {
+  res.send(await getAds());
 });
 
-app.listen(PORT, () =>{
-  console.log(`Server running under port: ${PORT}`);
+startDatabase().then(async () => {
+  await insertAd({ tittle: 'Hello from database' });
+  app.listen(PORT, () => {
+    console.log(`Server running under port: ${PORT}`);
+  });
 });
