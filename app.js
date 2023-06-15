@@ -5,6 +5,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { startDatabase } = require('./src/utils/mongodb');
 const  ads = require('./src/controller/ad');
+const login = require('./src/controller/auth/login');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(morgan('tiny'));
 
 app.use(apiVersion, ads);
+app.use(apiVersion, login);
 
 startDatabase().then(async () => {
   console.log('Database started');
