@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const { getAds, insertAd, deleteAd, updateAd } = require('../model/ads');
+const authMiddleware = require('../middleware/authorization');
 
-router.get('/', async (req, res) => {
+router.get('/', authMiddleware, async (req, res) => {
+  console.log('this is the user which access', req.user);
   res.send(await getAds());
 })
   .post('/', async (req, res) => {
